@@ -19,14 +19,13 @@ export default function Home({ posts }) {
             {siteMetadata.description}
           </p> */}
           <Hero />
-
           <Image
             src="/static/images/avatar.jpg"
             alt="avatar"
             priority
             width={400}
             height={300}
-            className="rounded-[100%]"
+            className="rounded-[100%] hidden"
           />
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">

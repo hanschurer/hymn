@@ -1,20 +1,18 @@
 ---
-title: 'The Time Machine'
-date: '2018-08-15'
-tags: ['writings', 'book', 'reflection']
+title: 'Unity Game Development Part 1 Zombie Stealth Game'
+date: '2022-08-15'
+tags: ['Unity', 'Game Development', 'C#']
 draft: false
-summary: The Time Traveller (for so it will be convenient to speak of him) was
-  expounding a recondite matter to us. His pale grey eyes shone and
-  twinkled, and his usually pale face was flushed and animated...
+summary: 'A zoombie stealth Game'
 ---
 
 # The Time Machine by H. G. Wells
 
-_Title_: The Time Machine
+_Title_: Unity Game Development Part 1 Zombie Stealth Game
 
-_Author_: H. G. Wells
+_Author_: H.w
 
-_Subject_: Science Fiction
+_Subject_: Game develop
 
 _Language_: English
 
@@ -22,217 +20,125 @@ _Source_: [Project Gutenberg](https://www.gutenberg.org/ebooks/35)
 
 ## Introduction
 
-The Time Traveller (for so it will be convenient to speak of him) was
-expounding a recondite matter to us. His pale grey eyes shone and
-twinkled, and his usually pale face was flushed and animated. The fire
-burnt brightly, and the soft radiance of the incandescent lights in the
-lilies of silver caught the bubbles that flashed and passed in our
-glasses. Our chairs, being his patents, embraced and caressed us rather
-than submitted to be sat upon, and there was that luxurious
-after-dinner atmosphere, when thought runs gracefully free of the
-trammels of precision. And he put it to us in this way—marking the
-points with a lean forefinger—as we sat and lazily admired his
-earnestness over this new paradox (as we thought it) and his fecundity.
+The name Zombie Shooter is confusing, Although the tutorial doesn't show any shooting
+capabilities. So, I decided to move the game in the direction of a third-person stealth game
+which the final goal is to reach the treasure.
+In the game, the FSM will be used to control the behavior of the zombies as well as the
+animation. This greatly extends the single behavior in the tutorial.
+The zombie attack in the tutorial is just an animation effect. In the zombie stealth game, the
+zombies will have the ability to kill the player by attack state.
+In the tutorial, the zombies will keep tracking the player until the player dies. This puts the
+zombies into God mode. A good way to avoid this is to add a sensing feature for the zombies.
+At first, I wanted to use the collider's trigger to detect if it collided with the player object.
+(Unity Technologies, 2019) But I found that this method causes huge overhead when there are
+too many objects around. It affects the game speed. Then I adopted my teacher's suggestion to
+use distance to determine whether the player is in the perceptual range.
+When the player enters the zombie's perception range, we need to define a zombie's field of
+view angle. This will be calculated by using the angle function of vector3. (Unity
+Technologies, 2019). We calculate the angle between the line of sight directly in front of the
+zombie and the line between the player to calculate whether the player is within the zombie's
+line of sight.
+Finally, we generate a ray to shoot at the player and specify his maximum distance which is
+the maxRadius. This is to let the player hide behind walls without being discovered by
+zombies.
+If the Raycasthit transform is equal to the player's transform we store the player's transfer into
+the nearby object. This way the zombie has a target. It is worth noting that here I adjusted the
+ray upward by 0.8 so that it can effectively simulate the ray emitted from the zombie's eye
+position, instead of hitting the floor from the ground.
+After the perception function, we can define a patrol behavior to make the zombie walk with a
+purpose instead of just having the function of rushing to the player as in the tutorial.
+I borrowed the map from the second week's problem on Aula and took the opportunity to
+implement the waypoints I was considering. Using these waypoints could increase the
+gameplay of the game rather than the tutorial.
+Waypoint alone is not enough. Once the player is familiar with the logic of zombie patrol, the
+game will become tasteless. So, in the treasure area I add zombie random wandering
+mechanism. Players will not be able to predict the behavior of zombies, thus adding more fun
+to the game.
+In addition to this, I used shaders to create visual sensory differences to the different states of
+the zombies. The zombie will turn red when attacking and chasing, which I call Berserk
+mode.
+In the tutorial, zombies have no life value. This will make the player very frustrated. I have
+added the combat feature. When a zombie has more than 0 life while that the player presses
+the attack button at a distance where he can attack, the zombie will bleed out and eventually
+die.
+On the player side, I want to give the player AI more freedom, so remove the navmesh agent
+function makes the player can use the up, down, left and right buttons to move, the player will
+have the ability to kill zombies by Left mouse click. More information about the player values
+setting to improve the gameplay can be found in the code comments.
+Both zombies and player have well-established animation controller to refine their behavior.
+Finally, I set up treasure points and a restart screen to increase the gameplay by more friendly
+to the player.
+Treasure goal:
+Game End canvas:
+In addition to enhancing gameplay on the designed waypoints. In the zombie base value also
+has some reflection on the gameplay. Such as the the HP value of the zombie is set at 10
+because the player does 3 damage per attack. This is to ensure that the zombie is not so easy
+to be killed to set a better game difficulty. The zombie's speed is set to a value relative to the
+player. It will go up to 2 when the zombie is chasing the player to make sure the zombie can
+catch up with the player
+The zombies in the game have a 90-degree angle view to better simulate reality and to comply
+with some industry standards. This is to try to mimic the feeling of nature by simulating the
+human eye. In order to make players have a better game experience, the zombie body
+specially set up a point light to have the same angle with the zombie field of view to
+implicitly inform the player of the zombie vision range.
+At this point, a simple zombie stealth game is complete. By extending the zombie's perception
+function and strategic patrol points, it gives the player a great gaming experience as well as
+increases the gameplay, In the future, perhaps adding a sneak function to the player to more
+strongly enhanced gameplay.
 
-“You must follow me carefully. I shall have to controvert one or two
-ideas that are almost universally accepted. The geometry, for instance,
-they taught you at school is founded on a misconception.”
 
-“Is not that rather a large thing to expect us to begin upon?” said
-Filby, an argumentative person with red hair.
 
-“I do not mean to ask you to accept anything without reasonable ground
-for it. You will soon admit as much as I need from you. You know of
-course that a mathematical line, a line of thickness _nil_, has no real
-existence. They taught you that? Neither has a mathematical plane.
-These things are mere abstractions.”
-
-“That is all right,” said the Psychologist.
-
-“Nor, having only length, breadth, and thickness, can a cube have a
-real existence.”
-
-“There I object,” said Filby. “Of course a solid body may exist. All
-real things—”
-
-“So most people think. But wait a moment. Can an _instantaneous_ cube
-exist?”
-
-“Don’t follow you,” said Filby.
-
-“Can a cube that does not last for any time at all, have a real
-existence?”
-
-Filby became pensive. “Clearly,” the Time Traveller proceeded, “any
-real body must have extension in _four_ directions: it must have
-Length, Breadth, Thickness, and—Duration. But through a natural
-infirmity of the flesh, which I will explain to you in a moment, we
-incline to overlook this fact. There are really four dimensions, three
-which we call the three planes of Space, and a fourth, Time. There is,
-however, a tendency to draw an unreal distinction between the former
-three dimensions and the latter, because it happens that our
-consciousness moves intermittently in one direction along the latter
-from the beginning to the end of our lives.”
-
-“That,” said a very young man, making spasmodic efforts to relight his
-cigar over the lamp; “that . . . very clear indeed.”
-
-“Now, it is very remarkable that this is so extensively overlooked,”
-continued the Time Traveller, with a slight accession of cheerfulness.
-“Really this is what is meant by the Fourth Dimension, though some
-people who talk about the Fourth Dimension do not know they mean it. It
-is only another way of looking at Time. _There is no difference between
-Time and any of the three dimensions of Space except that our
-consciousness moves along it_. But some foolish people have got hold of
-the wrong side of that idea. You have all heard what they have to say
-about this Fourth Dimension?”
-
-“_I_ have not,” said the Provincial Mayor.
-
-“It is simply this. That Space, as our mathematicians have it, is
-spoken of as having three dimensions, which one may call Length,
-Breadth, and Thickness, and is always definable by reference to three
-planes, each at right angles to the others. But some philosophical
-people have been asking why _three_ dimensions particularly—why not
-another direction at right angles to the other three?—and have even
-tried to construct a Four-Dimensional geometry. Professor Simon Newcomb
-was expounding this to the New York Mathematical Society only a month
-or so ago. You know how on a flat surface, which has only two
-dimensions, we can represent a figure of a three-dimensional solid, and
-similarly they think that by models of three dimensions they could
-represent one of four—if they could master the perspective of the
-thing. See?”
-
-“I think so,” murmured the Provincial Mayor; and, knitting his brows,
-he lapsed into an introspective state, his lips moving as one who
-repeats mystic words. “Yes, I think I see it now,” he said after some
-time, brightening in a quite transitory manner.
-
-“Well, I do not mind telling you I have been at work upon this geometry
-of Four Dimensions for some time. Some of my results are curious. For
-instance, here is a portrait of a man at eight years old, another at
-fifteen, another at seventeen, another at twenty-three, and so on. All
-these are evidently sections, as it were, Three-Dimensional
-representations of his Four-Dimensioned being, which is a fixed and
-unalterable thing.
-
-“Scientific people,” proceeded the Time Traveller, after the pause
-required for the proper assimilation of this, “know very well that Time
-is only a kind of Space. Here is a popular scientific diagram, a
-weather record. This line I trace with my finger shows the movement of
-the barometer. Yesterday it was so high, yesterday night it fell, then
-this morning it rose again, and so gently upward to here. Surely the
-mercury did not trace this line in any of the dimensions of Space
-generally recognised? But certainly it traced such a line, and that
-line, therefore, we must conclude, was along the Time-Dimension.”
-
-“But,” said the Medical Man, staring hard at a coal in the fire, “if
-Time is really only a fourth dimension of Space, why is it, and why has
-it always been, regarded as something different? And why cannot we move
-in Time as we move about in the other dimensions of Space?”
-
-The Time Traveller smiled. “Are you so sure we can move freely in
-Space? Right and left we can go, backward and forward freely enough,
-and men always have done so. I admit we move freely in two dimensions.
-But how about up and down? Gravitation limits us there.”
-
-“Not exactly,” said the Medical Man. “There are balloons.”
-
-“But before the balloons, save for spasmodic jumping and the
-inequalities of the surface, man had no freedom of vertical movement.”
-
-“Still they could move a little up and down,” said the Medical Man.
-
-“Easier, far easier down than up.”
-
-“And you cannot move at all in Time, you cannot get away from the
-present moment.”
-
-“My dear sir, that is just where you are wrong. That is just where the
-whole world has gone wrong. We are always getting away from the present
-moment. Our mental existences, which are immaterial and have no
-dimensions, are passing along the Time-Dimension with a uniform
-velocity from the cradle to the grave. Just as we should travel _down_
-if we began our existence fifty miles above the earth’s surface.”
-
-“But the great difficulty is this,” interrupted the Psychologist. ’You
-_can_ move about in all directions of Space, but you cannot move about
-in Time.”
-
-“That is the germ of my great discovery. But you are wrong to say that
-we cannot move about in Time. For instance, if I am recalling an
-incident very vividly I go back to the instant of its occurrence: I
-become absent-minded, as you say. I jump back for a moment. Of course
-we have no means of staying back for any length of Time, any more than
-a savage or an animal has of staying six feet above the ground. But a
-civilised man is better off than the savage in this respect. He can go
-up against gravitation in a balloon, and why should he not hope that
-ultimately he may be able to stop or accelerate his drift along the
-Time-Dimension, or even turn about and travel the other way?”
-
-“Oh, _this_,” began Filby, “is all—”
-
-“Why not?” said the Time Traveller.
-
-“It’s against reason,” said Filby.
-
-“What reason?” said the Time Traveller.
-
-“You can show black is white by argument,” said Filby, “but you will
-never convince me.”
-
-“Possibly not,” said the Time Traveller. “But now you begin to see the
-object of my investigations into the geometry of Four Dimensions. Long
-ago I had a vague inkling of a machine—”
-
-“To travel through Time!” exclaimed the Very Young Man.
-
-“That shall travel indifferently in any direction of Space and Time, as
-the driver determines.”
-
-Filby contented himself with laughter.
-
-“But I have experimental verification,” said the Time Traveller.
-
-“It would be remarkably convenient for the historian,” the Psychologist
-suggested. “One might travel back and verify the accepted account of
-the Battle of Hastings, for instance!”
-
-“Don’t you think you would attract attention?” said the Medical Man.
-“Our ancestors had no great tolerance for anachronisms.”
-
-“One might get one’s Greek from the very lips of Homer and Plato,” the
-Very Young Man thought.
-
-“In which case they would certainly plough you for the Little-go. The
-German scholars have improved Greek so much.”
-
-“Then there is the future,” said the Very Young Man. “Just think! One
-might invest all one’s money, leave it to accumulate at interest, and
-hurry on ahead!”
-
-“To discover a society,” said I, “erected on a strictly communistic
-basis.”
-
-“Of all the wild extravagant theories!” began the Psychologist.
-
-“Yes, so it seemed to me, and so I never talked of it until—”
-
-“Experimental verification!” cried I. “You are going to verify _that_?”
-
-“The experiment!” cried Filby, who was getting brain-weary.
-
-“Let’s see your experiment anyhow,” said the Psychologist, “though it’s
-all humbug, you know.”
-
-The Time Traveller smiled round at us. Then, still smiling faintly, and
-with his hands deep in his trousers pockets, he walked slowly out of
-the room, and we heard his slippers shuffling down the long passage to
-his laboratory.
-
-The Psychologist looked at us. “I wonder what he’s got?”
-
-“Some sleight-of-hand trick or other,” said the Medical Man, and Filby
-tried to tell us about a conjuror he had seen at Burslem, but before he
-had finished his preface the Time Traveller came back, and Filby’s
-anecdote collapsed.
+## References
+Criterion Software. (2001). Burnout [computer software]
+https://www.ea.com/games/burnout?isLocalized=true
+Dafoe, A., Hughes, E., Bachrach, Y., Collins, T., McKee, K. R., Leibo, J. Z., Larson, K., &
+Graepel, T. (2020). Open problems in cooperative AI. arXiv Preprint arXiv:2012.08630,
+J. Hu, H. Niu, J. Carrasco, B. Lennox, & F. Arvin. (2020). Voronoi-based multi-robot
+autonomous exploration in unknown environments via deep reinforcement learning.
+https://doi.org/10.1109/TVT.2020.3034800
+Jaderberg, M., Czarnecki, W. M., Dunning, I., Marris, L., Lever, G., Castañeda, A. G.,
+Beattie, C., Rabinowitz, N. C., Morcos, A. S., Ruderman, A., Sonnerat, N., Green, T.,
+Deason, L., Leibo, J. Z., Silver, D., Hassabis, D., Kavukcuoglu, K., & Graepel, T.
+(2019). Human-level performance in 3D multiplayer games with population-based
+reinforcement learning. Science, 364(6443), 859- 865. https://doi.org/10.1126/science.aau6249
+Jakob Rasmussen. (2016). Are behavior trees a thing of the
+past? https://www.gamasutra.com/blogs/JakobRasmussen/20160427/271188/Are_Behav
+ior_Trees_a_Thing_of_the_Past.php
+Jay Garmon. (2005). Geek trivia: First shots
+fired. https://www.techrepublic.com/article/geek-trivia-first-shots-fired/
+KDnuggets. (2019, ). The emergence of cooperative and competitive AI
+agents. https://www.kdnuggets.com/the-emergence-of-cooperative-and-competitive-ai￾agents.html/
+Millington, I., & Millington, I. (2006). Artificial intelligence for games. CRC Press LLC.
+Noam Brown and Anton Bakhtin. (2020, Dec). ReBeL: A general game-playing AI bot that
+excels at poker and more. https://ai.facebook.com/blog/rebel-a-general-game-playing-ai￾bot-that-excels-at-poker-and-more/
+OpenAI. (2019). Emergent tool use from multi-agent
+interaction. https://openai.com/blog/emergent-tool-use/
+Red Blob Games. (2014). Red blob games: Introduction to
+A*. https://www.redblobgames.com/pathfinding/a-star/introduction.html
+Silver, D., Hubert, T., Schrittwieser, J., Antonoglou, I., Lai, M., Guez, A., Lanctot, M., Sifre,
+L., Kumaran, D., Graepel, T., Lillicrap, T., Simonyan, K., & Hassabis, D. (2018). A
+general reinforcement learning algorithm that masters chess, shogi, and go through self￾play. Science, 362(6419), 1140-1144. https://doi.org/10.1126/science.aar6404
+Technologies, U.Unity - scripting API:
+Vector3. https://docs.unity3d.com/ScriptReference/Vector3.html
+Technologies, U. (2019). Unity - scripting API:
+MeshCollider. https://docs.unity3d.com/ScriptReference/MeshCollider.html
+Thaddeus Abiy. (2020). A* search | brilliant math & science wiki. https://brilliant.org/wiki/astar-search/
+Timothy Carbone. (2019, -12-09T22:39:05+00:00). Artificial intelligence in games –
+waypoint tactics. https://timpcarbone.com/2019/12/09/artificial-intelligence-in-gameswaypoint-tactics/
+Unity Technologies. (2019a). Unity - scripting API:
+Collider.OnTriggerEnter(collider). https://docs.unity3d.com/ScriptReference/Collider.O
+nTriggerEnter.html
+Unity Technologies. (2019b). Unity - scripting API:
+Vector3.angle. https://docs.unity3d.com/ScriptReference/Vector3.Angle.html
+Veldhuis, M. O. (2010). (2010). Artificial intelligence techniques used in first-person shooter
+and real-time strategy games. Paper presented at the Human Media Seminar: Designing
+Entertainment Interaction, , 2011
+Vinyals, O., Babuschkin, I., Czarnecki, W. M., Mathieu, M., Dudzik, A., Chung, J., Choi, D.
+H., Powell, R., Ewalds, T., Georgiev, P., Oh, J., Horgan, D., Kroiss, M., Danihelka, I.,
+Huang, A., Sifre, L., Cai, T., Agapiou, J. P., Jaderberg, M., . . . Silver, D. (2019).
+Grandmaster level in StarCraft II using multi-agent reinforcement
+learning. Nature, 575(7782), 350-354. https://doi.org/10.1038/s41586-019-1724-z
+Vorkflowengine. (2020). Why developers never use state
+machines. https://workflowengine.io/blog/why-developers-never-use-state-machines/
+Zemzem, W., & Tagina, M. (2018). Cooperative multi-agent systems using distributed
+reinforcement learning techniques. Procedia Computer Science, 126, 517- 526. https://doi.org/10.1016/j.procs.2018.07.286
