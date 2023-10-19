@@ -3,8 +3,8 @@ const Hero = () => {
     <div className="space-y-6 md:my-16">
       <div className="flex flex-col-reverse gap-8 md:flex-row md:justify-between">
         <div className="space-y-4 md:max-w-lg">
-          <h1 className="text-4xl font-bold text-accent-fg">Han Wang</h1>
-          <h2 className="text-lg font-medium text-accent-5">Full-stack Developer</h2>
+          <h1 className="text-accent-fg text-4xl font-bold ">Han Wang</h1>
+          <h2 className="text-accent-5 text-lg font-medium ">Full-stack Developer</h2>
           <p className="text-lg">
             I am a graduate, currently learning web development skills such as Next.js, Node.js,
             Prisma, and database management.
