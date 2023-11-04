@@ -66,7 +66,14 @@ module.exports = () => {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
     images: {
-      domains: ['picsum.photos'],
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'example.com',
+          port: '',
+          pathname: '/account123/**',
+        },
+      ],
     },
     async headers() {
       return [
