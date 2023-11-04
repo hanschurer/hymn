@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'Hymn',
   author: 'Han Wang',
   headerTitle: 'Hymn',
-  description: 'A blog created with Next.js and Tailwind.css',
+  description: 'This is my website',
   language: 'en-us',
   theme: 'light', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
