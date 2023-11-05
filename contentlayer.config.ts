@@ -21,6 +21,7 @@ import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+import { sql } from '@vercel/postgres'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -59,7 +60,9 @@ function createTagCount(allBlogs) {
       })
     }
   })
-  writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
+  sql`INSERT INTO tags_data VALUES (${JSON.stringify(tagCount)})`
+
+  // writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
 }
 
 function createSearchIndex(allBlogs) {

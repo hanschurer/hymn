@@ -1,10 +1,12 @@
+import { fetchProjects } from 'app/lib/db'
 import projectsData from '@/data/projectsData'
 import Card from '@/components/Card'
 import { genPageMetadata } from 'app/seo'
-
 export const metadata = genPageMetadata({ title: 'Projects' })
 
-export default function Projects() {
+export default async function Projects() {
+  const projects = await fetchProjects()
+
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -27,6 +29,15 @@ export default function Projects() {
                 href={d.href}
               />
             ))}
+            {/* {projects.map((d:any) => (
+              <Card
+                key={d.name}
+                title={d.name}
+                description={d.description}
+                imgSrc={'http://fdsa'}
+                href={'/3243'}
+              />
+            ))} */}
           </div>
         </div>
       </div>
