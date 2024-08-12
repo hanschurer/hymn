@@ -1,0 +1,50 @@
+---
+title: AI approaches and problems in first person shooting game
+date: '2021-05-14'
+tags: ['game development']
+draft: false
+summary: 'AI approaches and problems in first person shooting game'
+---
+
+A first-person shooter is a first-person perspective shooter in which the player experiences the
+action through the three-dimensional view of the character. (Jay Garmon, 2005) This kind of
+genre game's primary design focus is on combat or advancing to certain waypoints to
+accomplish objectives set by the developer. In single-player mode, this involves the player
+using guns or other types of long-range weapons to eliminate those pre-made enemies (AI)
+targets in the game. (Veldhuis, 2010)
+
+The video game industry has been looking for convenient and practical ways for game non-
+player characters (AI) to make intelligent decisions quickly and efficiently. This includes
+navigation features that help characters move through 3D environments, such as the most
+used A* algorithm. The A * is a computer algorithm that extends Dijkstra's algorithm with
+some of the features of Breadth First Search (BFS). The A* algorithm is widely used for
+shortest pathfinding in games. It efficiently draws the shortest path between multiple nodes or
+points on a graph. (Thaddeus Abiy, 2020) In Left 4 Dead, an A* algorithm pathfinding
+algorithm is used to move an AI to a certain location. (Booth, 2009).
+
+Although the A* algorithm is one of the most versatile algorithms in the industry, it is not
+foolproof. It cannot handle things like co-movement, moving obstacles, map changes, danger
+zones, formation, turn radius, object size, animation, path smoothing or many other topics by
+itself and developers need to solve these problems by combining other algorithms like genetic
+algorithms, reinforcement learning, etc. (Red Blob Games, 2014)
+
+NPCs in first-person shooter games often use Finite State Machine(FSM) to manage their
+behavior. (Hoorn, Togelius,& Schmidhuber, 2009). An FSM is a computational model which
+consisting of more than one states. Only one state will be allowed to active at the one time, so
+the AI need to switch from one state to another in order to acts different operation. Although
+finite state machines have been around for a long time, they are still quite common and useful
+in modern games.
+
+Finite state machines also have a few problems. If we need to develop AI with multiple states,
+then we have to consider multiple possible states of AI behavior. If the number of such states
+may reach 100 or more. This causes a dramatic increase in code complexity, making it very
+difficult to add new programs and the system becomes unmanageable or even has to reinvent
+machine. Their logic is also limited, and all you can do is edit the transitions from one state to
+another. It occurs when a state machine reaches a state and cannot exist because no valid input
+would trigger such activity. This often leads to behavior with unknown results, which can
+cause the system to fail. (Vorkflowengine,2020 )
+
+Therefore, the idea of organizing tasks in a tree-like structure (also called behavior trees) has
+emerged in some games. In contrast to FSM, behavior trees provide a framework for
+designing more understandable and accessible AI in many cases. Moreover, well-organized
+trees make visual debugging easier in practice. (Jakob Rasmussen, 2016)

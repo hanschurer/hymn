@@ -1,0 +1,41 @@
+---
+title: A bug related to the AI in Cyberpunk2077
+date: '2021-05-02'
+tags: ['game development']
+draft: false
+summary: 'Some random thoughts about the game's AI while playing Cyberpunk 2077'
+---
+
+# A bug related to the AI in Cyberpunk2077.
+An interesting bug I found in Cyberpunk2077 is that If there is a vehicle damaged in front of
+the lane, the following vehicles will remain blocking instead of changing lanes. Over time, the
+entire lane will accumulate many cars, even if the lane next to it is free of any traffic. 
+
+# What do I think causes this bug?
+The main reasons for this problem may be due to two reasons. Whether the wrong pathfinding or the lack of a particular steering behavior while AI drives the car. (Millington & Millington, 2006) proposes two types of driving options. 
+The first approach is to generate more than one racing lines to allow the car to achieve its optimal speed. Computer-controlled cars can drive
+along the predefined path by Splines which is a mathematical curve.
+However, there are some shortcomings:
+• Will not be able to avoid if there is a crash ahead.
+• If the player collides, the car will not be able to deviate from the route.
+• Car cannot overtake.
+This could be one of the reasons for this bug.
+
+The second method is to let the AI drive the car, put some inputs into the physics simulator to
+create more realistic effects. This means that the AI often failed to achieve its desired line,
+especially when hit by another car can create some other problems. The earliest use of this
+method was in the game Gran Turismo (Polyphonic Digital, 1997). So as in Cyberpunk 2077,
+the AI drive car will remain in the racing line waiting for the blockage ahead to be relieved. In
+brief, artificial intelligence often fails to achieve the route it expects, especially if it is pushed
+by another vehicle or blocked by an obstacle.
+
+# What do I think the underlying algorithms are working.
+In terms of the underlying algorithms, I think the driving AI will first watch the
+explicit traffic flow or pedestrian on the road. Then enter into the decision-making
+state which could use FSM /script/ rule-based system to select its destination and then
+go through the Markov/Fuzzy SM to generate the desired steering. the next step is to
+use A* to find the path, and finally to steering itself to the right direction.
+Finally, to solve the cyberpunk2077 problem, when cars crashed ahead or vehicles blocked
+the lane sits on the road, A steering behaviors can be added to the AI: The car can monitor the
+traffic in the next lane and then wait for a long straight line before overtaking. This kind of
+behavior has been applied in many driving games from Gran Turismo to Burnout (Criterion Software, 2001).

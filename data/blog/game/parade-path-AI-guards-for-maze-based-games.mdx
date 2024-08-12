@@ -1,0 +1,49 @@
+---
+title: A thought on the parade path of AI guards for maze-based games
+date: '2021-05-08'
+tags: ['game development']
+draft: false
+summary: 'Some random thoughts about A thought on the parade path of AI guards for maze-based games'
+---
+
+```
+A graph usually consists of two types of elements: nodes and edges. Nodes are usually
+described as points or circles, and the lines between points are called edges.(Millington, 2006)
+In terms of pathfinding, waypoints are locations in the level where the pathfinding system is
+used to connect areas in the level. In normal wayfinding, they are used to tell the AI how to
+get from point A to point B without going through walls or taking a route that doesn't seem
+reasonable to the player. To increase the fun of the game, we could have some tactical
+waypoints. Waypoint tactics are about giving waypoints more information so that the AI can
+make more complex and informed decisions. (Timothy Carbone, 2019)
+```
+
+![](https://raw.githubusercontent.com/hanschurer/picgo/master/img/Screenshot%202024-08-12%20at%2022.11.46.png)
+
+In this graph, if players want to reach the yellow ball location, which is the location of the
+treasure, they need to go through at least one or two of the three gates. To increase the
+difficulty of the game, the route of travel of the two red balls must be around the three gates
+for movement. This is to ensure that players do not get the treasure too easily. We can see that
+there are three small square barriers in the area where the player was born. In the remaining
+two areas there is also one each. These small square areas are effective in blocking the AI's
+view as the AI can only see the front 90 degrees of the area. This will help players to find
+some cover points or shadows to hide.
+We could design waypoints with attributes to help players avoid the sight of the guards. In
+this game. We can simply store two tactical qualities: shadow and cover so we could presume
+the best places for the player to hide in order to avoid the guard.
+Guard A waypoints and their thoughts:
+1. Node1 is the starting point.
+2. The second point is to block gate2 to prevent players from passing.
+3. The third point is to give players more challenges, through the use of cover points and
+shadow can be very good to avoid the sight of the guards.
+4. Node 4 and node 6 are to prevent the player pass through gate2 too easy, the guards will
+turn back to better guard the gate3 to prevent players from getting the treasure.
+5. Node 5 is to eliminate dead space to prevent players from staying in the shadow point too
+long to wait for the guard to pass.
+Guard B waypoints and their thoughts:
+1. Node1 and node 2 is the starting point to prevent player pass the gate 1.
+2. Node3 is to monitor the lower half of the lower-left corner area. This can be done in
+conjunction with guard1 to maximize the restriction of the player's position so that the
+player can maximize the use of cover points to hide themselves.
+3. Node4 is to strengthen to prevent players from passing gate1, Node5 is to eliminate the
+shadow point in the lower-left corner to prevent players from staying in the shadow point for too long.
+4. Finally, Node6 is designed to work with Guard1 to guard the waypoint of gate3.
