@@ -46,8 +46,8 @@ function weekend() {
     ],
     loop: true,
     delaySpeed: 2000,
-    typeSpeed: 40,
-    deleteSpeed: 20,
+    typeSpeed: 80,
+    deleteSpeed: 30,
   })
 
   const highlightCode = (code: string) => {
@@ -124,7 +124,7 @@ function weekend() {
         {/* 右侧：代码展示 */}
         <div className="h-[260px] rounded-lg bg-[#1e1e1e] p-4">
           <div className="font-mono text-sm text-gray-300">
-            <div
+            <span
               className="whitespace-pre"
               dangerouslySetInnerHTML={{ __html: highlightCode(text) }}
             />
