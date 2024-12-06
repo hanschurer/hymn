@@ -3,7 +3,7 @@ import Link from '@/components/Link'
 import SocialIcon from '@/components/social-icons'
 import siteMetadata from '@/data/siteMetadata'
 import { useTypewriter, Cursor } from 'react-simple-typewriter'
-
+/* eslint-disable no-useless-escape */
 export default function Hero() {
   const [text] = useTypewriter({
     words: [
@@ -30,7 +30,7 @@ while (life.continues) {
       `
 const skills = {
   frontend: ['React', 'Next.js', 'TypeScript'],
-  backend: ['Node.js', 'Python', 'Java],
+  backend: ['Node.js', 'Python', 'Java'],
   learning: Infinity,
   coffeeLevel: '☕️'.repeat(3)
 }`,
@@ -64,7 +64,7 @@ function weekend() {
         )
         // 函数调用和方法
         .replace(
-          /\b(coffee|bugs|panic|keepCoding|success|skills|hobbies|enjoy)\b(?=\s*[\(.])/g,
+          /\b(coffee|bugs|panic|keepCoding|success|skills|hobbies|enjoy)\b(?=\s*[()])/g,
           '<span style="color: #DCDCAA">$1</span>'
         )
         // 属性
