@@ -1,8 +1,8 @@
 const { sql } = require('@vercel/postgres')
-import { unstable_noStore as noStore } from 'next/cache'
+// import { unstable_noStore as noStore } from 'next/cache'
 
 export async function fetchTags() {
-  noStore()
+  // noStore()
   try {
     const data = await sql`Select * from tags_data;`
     return data.rows.pop().tags

@@ -74,6 +74,11 @@ module.exports = () => {
           pathname: '/account123/**',
         },
       ],
+      domains: [
+        'res.cloudinary.com', // 添加 cloudinary 域名
+        'raw.githubusercontent.com', // 如果你也使用 GitHub 图片，建议也添加
+        'picsum.photos', // 如果你使用 Lorem Picsum 作为占位图
+      ],
     },
     async headers() {
       return [

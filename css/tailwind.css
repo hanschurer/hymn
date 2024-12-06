@@ -14,6 +14,23 @@
   @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
 }
 
+/* 代码高亮颜色 */
+.keyword {
+  color: #c678dd;
+}
+
+.function {
+  color: #61afef;
+}
+
+.operator {
+  color: #56b6c2;
+}
+
+.punctuation {
+  color: #abb2bf;
+}
+
 .data-footnote-backref {
   @apply no-underline;
 }
